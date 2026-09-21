@@ -1,6 +1,6 @@
 ---
 name: fire-your-seo-agency
-description: SEO·AEO·GEO·LLMO·NEO(네이버) 다섯 레인을 진단하고 직접 구현하는 스킬. 사이트를 검색엔진·답변엔진·생성 AI·네이버 AI 브리핑이 인용하는 1차 소스로 만든다. "SEO 해줘", "AI에 인용되게 해줘", "네이버 노출 늘려줘", "llms.txt 만들어줘" 류 요청에 사용. Use for "audit my site's SEO", "get my site cited by ChatGPT/Perplexity/AI Overviews", "improve search visibility", "create llms.txt", "answer engine / generative engine optimization", and any AI-search-visibility request.
+description: SEO·AEO·GEO·LLMO·NEO(네이버) 다섯 레인을 진단하고 직접 구현하며, 인용되는 콘텐츠를 계속 생산하는 서브 블로그·콘텐츠 운영 파이프라인까지 세팅하는 스킬. 사이트를 검색엔진·답변엔진·생성 AI·네이버 AI 브리핑이 인용하는 1차 소스로 만든다. "SEO 해줘", "AI에 인용되게 해줘", "네이버 노출 늘려줘", "llms.txt 만들어줘", "블로그 만들어줘/글 써줘", "콘텐츠 백로그·캘린더 잡아줘", "낡은 글 갱신해줘" 류 요청에 사용. Use for "audit my site's SEO", "get my site cited by ChatGPT/Perplexity/AI Overviews", "improve search visibility", "create llms.txt", "answer engine / generative engine optimization", "set up a blog that gets cited", "content backlog / calendar / refresh", and any AI-search-visibility request.
 ---
 
 # fire-your-seo-agency — 운영 절차
@@ -38,6 +38,10 @@ curl -sL https://example.com/robots.txt                # 크롤러 허용 정책
 curl -sL https://example.com/sitemap.xml | head        # 사이트맵 존재·규모
 curl -sL https://example.com/llms.txt                  # GEO 준비 여부
 curl -s -o /dev/null -w '%{http_code}' https://example.com/없는페이지  # 404가 404인가
+# 콘텐츠 운영: 블로그·피드가 있는가, 최근 발행은 언제인가
+curl -s -o /dev/null -w '%{http_code}' https://example.com/blog       # 서브 블로그 존재
+curl -s -o /dev/null -w '%{http_code}' https://example.com/feed.xml   # RSS/Atom
+curl -sL https://example.com/sitemap.xml | grep -o '<lastmod>[^<]*' | sort | tail -1  # 최근 발행일
 ```
 
 **noindex는 최우선 점검이다** — 스테이징용 `noindex`가 프로덕션에 배포된 사고는
@@ -50,6 +54,9 @@ curl -s -o /dev/null -w '%{http_code}' https://example.com/없는페이지  # 40
 | SEO | ⚠️ | 본문은 SSR이나 사이트맵에 상세 페이지 누락 |
 | AEO | ❌ | FAQ 구조화 데이터 0건 |
 | … | | |
+| 콘텐츠 | ⚠️ | 블로그 34건이나 질문 매핑 0건, 최근 90일 발행 0 |
+
+다섯 레인 아래에 **콘텐츠 운영** 행을 하나 더 둔다 (서브 블로그 유무·질문 매핑·발행 리듬).
 
 진단 후 사용자에게 **우선순위 제안**을 하고 승인받아 진행한다. 코드베이스 접근이 가능하면
 직접 고치고, 아니면 고칠 것을 파일·라인 수준으로 특정해 전달한다.
@@ -80,10 +87,31 @@ JSON-LD → canonical → 함정 점검(404 캐시 베이크, CSR 바일아웃).
 서치어드바이저 등록은 사용자 계정이 필요하므로 절차를 안내하고, 나머지(사이트맵 제출 형식,
 모바일 최적화, AI 브리핑 인용 요건)는 직접 구현한다.
 
-## Phase 5 — 측정 루프
+## Phase 5 — 콘텐츠 운영 (서브 블로그·콘텐츠 관리)
+
+일회성 세팅이 끝난 뒤 **반복되는 일**이다 — 대행사 월 구독료의 대부분이 여기("월 N건
+포스팅")서 나온다. `references/content.md`를 읽고 실행한다:
+
+- **위치 결정**: 서브디렉터리(`/blog`)가 기본값. 팩트의 원장은 자기 도메인, 외부 플랫폼은 위성
+- **콘텐츠 모델**: 글마다 `question`·`answer`·`data_asof`·`sources`·`faq` frontmatter —
+  렌더와 JSON-LD를 이 한 소스에서 생성한다
+- **질문 백로그**: GSC·서치어드바이저 검색어 중 전용 페이지 없는 질문이 대기열이다.
+  `content/backlog.md`로 관리
+- **발행 게이트**: 직답·SSR·메타·LD·내부 링크·사이트맵·IndexNow·llms.txt 체크리스트를
+  전부 통과해야 발행
+- **갱신·병합**: 노출 30% 하락·기준 데이터 변경이면 갱신, 같은 질문의 중복은 301 병합,
+  삭제는 최후 수단
+- **AI 초안**: 허용하되 수치 원출처 대조 + 사람 검수·서명 + 대량 자동 발행 금지
+
+"블로그 글 써줘", "콘텐츠 캘린더 잡아줘", "낡은 글 정리해줘" 같은 요청이 바로 오면
+Phase 0의 콘텐츠 진단(인벤토리) → 이 Phase로 직행한다. 글 한 편을 쓰더라도 브리프
+다섯 줄(질문·직답·근거·하위 질문·내부 링크)을 먼저 채우고, 발행 게이트를 통과시킨다.
+
+## Phase 6 — 측정 루프
 
 `references/measure.md`를 읽고: 변경 직후 기준선 기록 → 재측정 일정(14일 후) 제안 →
-지표 3종(노출·클릭·인용) 추적 방법 세팅. **"고쳤다"로 끝나는 보고는 실패다** —
+지표 3종(노출·클릭·인용) 추적 방법 세팅. 콘텐츠는 글 단위로 같은 루프를 돈다
+("월 N건 발행"이 아니라 "노출·인용된 글의 비율"이 지표다). **"고쳤다"로 끝나는 보고는 실패다** —
 "언제 무엇을 다시 재는지"까지가 완료 조건이다.
 
 ## 보고 형식

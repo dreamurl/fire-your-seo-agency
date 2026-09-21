@@ -40,6 +40,12 @@ as five distinct lanes:
 **NEO is what makes this skill different.** Global AEO guides ignore Naver entirely,
 but if you serve the Korean market, half your traffic lives there.
 
+**Plus a content engine.** Most of a retainer pays for "N posts a month". This skill
+replaces that with a pipeline: a question backlog pulled from your own search data, a
+frontmatter content model that generates the JSON-LD, a publish gate every post must pass,
+and a refresh/merge policy so posts don't rot. Output is measured as "posts that get seen
+and cited", not "posts published".
+
 ## Install
 
 As a plugin (recommended — one command, easy updates):
@@ -85,7 +91,8 @@ touching anything:
 3. **Intent landing pages** — designs pages on the "one question = one page" principle
 4. **Machine readability** — llms.txt, JSON-LD, citation-ready paragraph structure
 5. **Naver** — from Search Advisor registration to AI Briefing citation requirements
-6. **Measurement loop** — schedules a re-measurement and proves the change with numbers
+6. **Content engine** — sub-blog setup, question backlog, publish gate, refresh & merge policy
+7. **Measurement loop** — schedules a re-measurement and proves the change with numbers
 
 ## What it refuses to do
 
@@ -106,6 +113,7 @@ references/
   geo.md              ← generative engine optimization (AI crawler policy · llms.txt · primary source)
   llmo.md             ← model-knowledge optimization (brand entity)
   neo-naver.md        ← Naver (Search Advisor · AI Briefing · blog two-track)
+  content.md          ← content ops (sub-blog · content model · backlog · publish gate · refresh)
   measure.md          ← the measurement loop (fixing it is not the finish line)
   en/                 ← English mirrors of all reference docs (for human readers)
 .claude-plugin/       ← plugin & marketplace manifests (/plugin install support)
