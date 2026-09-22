@@ -117,10 +117,33 @@ references/
   measure.md          ← the measurement loop (fixing it is not the finish line)
   en/                 ← English mirrors of all reference docs (for human readers)
 .claude-plugin/       ← plugin & marketplace manifests (/plugin install support)
+tools/                ← repository checks (validate.py) + lossless asset optimizer
+tests/                ← unit tests for the checks
+.github/workflows/    ← CI: checks, tests and the asset check on every push/PR
 ```
 
 > The Korean documents under `references/` are canonical (the agent reads those);
 > `references/en/` mirrors them in English for human readers.
+
+## Repository checks
+
+This repo checks itself — `.github/workflows/validate.yml` runs all of it on every push
+and pull request:
+
+```bash
+python3 tools/validate.py --strict          # 10 checks, standard library only
+python3 -m unittest discover -s tests -t .  # unit tests for every check
+python3 -m pip install pillow
+python3 tools/optimize_assets.py --check    # flags recompressible assets
+```
+
+`tools/validate.py` enforces the things that rot silently in a docs-only repo: the
+`SKILL.md` frontmatter contract (kebab-case name, 64-character name limit, 1024-character
+single-line description), `plugin.json` ↔ `marketplace.json` version and name agreement,
+`CHANGELOG.md` matching the manifest version, relative links and anchors, Korean/English
+reference parity (heading counts, table rows, checkboxes, section numbering), the asset
+budget and preview dimensions, the MIT license metadata, and a secret scan over every
+text file.
 
 ## License
 
