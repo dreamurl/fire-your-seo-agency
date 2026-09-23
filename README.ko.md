@@ -2,6 +2,11 @@
 
 **한국어** · [English](./README.md)
 
+[![GitHub stars](https://img.shields.io/github/stars/leopard627/fire-your-seo-agency?style=flat&logo=github)](https://github.com/leopard627/fire-your-seo-agency/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/leopard627/fire-your-seo-agency?style=flat&logo=github)](https://github.com/leopard627/fire-your-seo-agency/fork)
+[![Latest release](https://img.shields.io/github/v/release/leopard627/fire-your-seo-agency?style=flat&label=release)](https://github.com/leopard627/fire-your-seo-agency/releases/latest)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green?style=flat)](./LICENSE)
+
 ![fire-your-seo-agency](./assets/social-preview.png)
 
 > **월 50~350만 원짜리 SEO·AEO 대행, 해고하세요. 당신의 AI 에이전트가 직접 합니다.**
@@ -117,6 +122,16 @@ references/
 
 > `references/`의 한국어 문서가 정본이고(에이전트가 읽는 것), `references/en/`은
 > 사람 독자를 위한 영문 미러입니다.
+
+## Star History
+
+<a href="https://www.star-history.com/#leopard627/fire-your-seo-agency&Date">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=leopard627/fire-your-seo-agency&type=Date&theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=leopard627/fire-your-seo-agency&type=Date" />
+    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=leopard627/fire-your-seo-agency&type=Date" />
+  </picture>
+</a>
 
 ## 라이선스
 

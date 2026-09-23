@@ -2,6 +2,11 @@
 
 [한국어](./README.ko.md) · **English**
 
+[![GitHub stars](https://img.shields.io/github/stars/leopard627/fire-your-seo-agency?style=flat&logo=github)](https://github.com/leopard627/fire-your-seo-agency/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/leopard627/fire-your-seo-agency?style=flat&logo=github)](https://github.com/leopard627/fire-your-seo-agency/fork)
+[![Latest release](https://img.shields.io/github/v/release/leopard627/fire-your-seo-agency?style=flat&label=release)](https://github.com/leopard627/fire-your-seo-agency/releases/latest)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green?style=flat)](./LICENSE)
+
 ![fire-your-seo-agency](./assets/social-preview.png)
 
 > **Paying $400–$2,500/month for an SEO or "AI visibility" agency? Fire them. Your AI agent can do the work.**
@@ -121,6 +126,16 @@ references/
 
 > The Korean documents under `references/` are canonical (the agent reads those);
 > `references/en/` mirrors them in English for human readers.
+
+## Star History
+
+<a href="https://www.star-history.com/#leopard627/fire-your-seo-agency&Date">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=leopard627/fire-your-seo-agency&type=Date&theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=leopard627/fire-your-seo-agency&type=Date" />
+    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=leopard627/fire-your-seo-agency&type=Date" />
+  </picture>
+</a>
 
 ## License
 
